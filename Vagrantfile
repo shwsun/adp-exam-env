@@ -1,23 +1,20 @@
 Vagrant.configure("2") do |config|
-    # installed in /opt/vagrant/embedded .... gemrc 
-    # https://cloud.centos.org/centos/7/vagrant/x86_64/images/CentOS-7-x86_64-Vagrant-2004_01.VirtualBox.box
-    # vagrant box add centos/7 CentOS-7-x86_64-Vagrant-2004_01.VirtualBox.box
-    # config.vbguest.auto_update = false
-    # test linux 
+    ##### test empty linux box #####
+    # empty linux 
     # 연습으로 깡통 리눅스만 올려 봅니다. 
-    # vagrant up test 명령이 실행 완료되면, 리눅스 가상머신이 생성됩니다.
-    # vagrant ssh test 로 리눅스 운영체제에 콘솔 연결할 수 있습니다. 
-    config.vm.define "test" do |vname|
-        vname.vm.box = "centos/7"
-        vname.vm.hostname = "test"
+    # vagrant up empty 명령이 실행 완료되면, 리눅스 가상머신이 생성됩니다.
+    # vagrant ssh empty 로 리눅스 운영체제에 콘솔 연결할 수 있습니다. 
+    config.vm.define "empty" do |vname|
+        vname.vm.box = "ubuntu/trusty64"
+        vname.vm.hostname = "empty"
 
         vname.trigger.before :halt do |trigger|
-            trigger.warn = "Dumping database to /vagrant/outfile"
-            trigger.run_remote = {inline: "echo AAAA"}
+            trigger.warn = "resource clearing before halt."
+            trigger.run_remote = {inline: "echo ..."}
         end
 
         vname.vm.provider "virtualbox" do |vb|
-            vb.name = "test"
+            vb.name = "empty"
             vb.customize ['modifyvm', :id, '--audio', 'none']
             vb.memory = 1000
             vb.cpus = 2
