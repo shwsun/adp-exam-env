@@ -64,6 +64,10 @@ cat /etc/*release*
 ---  
 ## 4. R Studio 에서 시험결과 리포트 생성하기  
 
+## 5. Vagrant 명령어 간단 설명  
+
+
+
 
 
 
